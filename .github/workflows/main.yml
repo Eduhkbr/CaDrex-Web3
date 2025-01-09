@@ -52,9 +52,9 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-  - name: Deploy to GitHub Pages
-    uses: JamesIves/github-pages-deploy-action@v4
-    with:
-      token: ${{ secrets.GITHUB_PAT }}
-      branch: gh-pages
-      folder: public
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        token: ${{ secrets.GITHUB_PAT }}
+        branch: gh-pages
+        folder: public
