@@ -35,7 +35,7 @@ jobs:
         PROVIDER_URL: ${{ secrets.PROVIDER_URL }}
       run: |
         cd cadrex-web3-backend
-        node index.js &
+        pm2 start index.js
     - name: Test the backend
       run: |
         cd cadrex-web3-backend
@@ -44,17 +44,4 @@ jobs:
       if: always()
       run: |
         cd cadrex-web3-backend
-        pkill -f node
-        
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v3
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        token: ${{ secrets.GITHUB_PAT }}
-        branch: gh-pages
-        folder: docs
+        pm2 stop index.js
