@@ -121,7 +121,7 @@ class TokenManager {
       </li>
     `).join('');
   }
-  
+
   carregarRatingHtml() {
     const conteudo = document.getElementById("conteudo");
     conteudo.innerHTML = htmlRating;
@@ -185,7 +185,7 @@ class TokenManager {
     }
   }
 
-  async consultar(event) {
+  async consultar() {
     event.preventDefault();
     const form = document.getElementById("formSaldo");
     alert("Aguarde a consulta ser processada pelo Provedor");
@@ -193,7 +193,7 @@ class TokenManager {
     form.formAmount.value = saldo;
   }
 
-  async mintar(event) {
+  async mintar() {
     event.preventDefault();
     const btn = document.getElementById("btnMintar");
     btn.value = "Processando...";
@@ -215,7 +215,7 @@ class TokenManager {
     }
   }
 
-  async mudarRating(event) {
+  async mudarRating() {
     event.preventDefault();
     const btn = document.getElementById("btnRating");
     btn.value = "Processando...";
@@ -237,7 +237,7 @@ class TokenManager {
     }
   }
 
-  async mudarContrato(event) {
+  async mudarContrato() {
     event.preventDefault();
     alert("Aguarde e confirme a transação no Metamask");
     const form = document.getElementById("formContrato");
@@ -245,7 +245,7 @@ class TokenManager {
     this.init();
   }
 
-  async burn(event) {
+  async burn() {
     event.preventDefault();
     const btn = document.getElementById("btnBurn");
     btn.value = "Processando...";
@@ -267,7 +267,7 @@ class TokenManager {
     }
   }
 
-  async transfer(event) {
+  async transfer() {
     event.preventDefault();
     const btn = document.getElementById("btnTransfer");
     btn.value = "Processando...";

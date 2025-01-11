@@ -29,7 +29,7 @@ const htmlCabecalho = `<h3>
     <br /><br />
     <input type="number" disabled name="formAmount" id="formAmount" />
     <br /><br />
-    <input type="button" value="Consultar" onclick="consultar()" />
+    <input type="button" value="Consultar" onclick="tokenManager.consultar()" />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input type="reset" value="Limpar" />
   </form>
@@ -56,7 +56,7 @@ const htmlMintar = `<h2>Novo Token</h2>
     <br /><br />
     <input type="number" placeholder="10000" required name="formAmount" id="formAmount" />
     <br /><br />
-    <input id="btnMintar" type="button" value="Mintar (gerar) Token" onclick="mintar()" />
+    <input id="btnMintar" type="button" value="Mintar (gerar) Token" onclick="tokenManager.mintar()" />
   </form>
 </div>`;
 
@@ -80,7 +80,7 @@ const htmlBurn = `<h2>Burn Token</h2>
     <br /><br />
     <input type="number" placeholder="10000" required name="formAmountBurn" id="formAmountBurn" />
     <br /><br />
-    <input id="btnBurn" type="button" value="Burn (Queimar) Token" onclick="burn()" />
+    <input id="btnBurn" type="button" value="Burn (Queimar) Token" onclick="tokenManager.burn()" />
   </form>
 </div>`;
 
@@ -104,7 +104,7 @@ const htmlTransfer = `<h2>Transferir Token</h2>
     <br /><br />
     <input type="number" placeholder="10000" required name="formAmountTransfer" id="formAmountTransfer" />
     <br /><br />
-    <input id="btnTransfer" type="button" value="Transferir Token" onclick="transfer()" />
+    <input id="btnTransfer" type="button" value="Transferir Token" onclick="tokenManager.transfer()" />
   </form>
 </div>`;
 
@@ -115,7 +115,7 @@ const htmlRating = `<h2>Novo Rating</h2>
     <br /><br />
     <input type="text" placeholder="AAA" required name="formAmountRating" id="formAmountRating" />
     <br /><br />
-    <input id="btnRating" type="button" value="Rating Token" onclick="mudarRating()" />
+    <input id="btnRating" type="button" value="Rating Token" onclick="tokenManager.mudarRating()" />
   </form>
 </div>`;
 
@@ -126,6 +126,6 @@ const htmlSelecionarContrato = `<h2>Escolha o Contrato pelo HASH</h2>
     <br /><br />
     <input type="text" placeholder="0x2A846FC387e88F1fAC685AeFD70EeE26394C5611" required name="formHashContrato" id="formHashContrato" />
     <br /><br />
-    <input id="btnContrato" type="button" value="Selecionar Contrato" onclick="mudarContrato()" />
+    <input id="btnContrato" type="button" value="Selecionar Contrato" onclick="tokenManager.mudarContrato()" />
   </form>
 </div>`;
