@@ -4,9 +4,9 @@ const htmlCabecalho = `<h3>
   <span id="tokenNome">Buscando informação...</span>
   -
   <span id="tokenSimbolo">Buscando informação...</span>
-  <span id="tokenRating">Buscando informação...</span>
 </h3>
 <h3>Total circulante: <span id="tokenTotalSupply">Buscando informação...</span></h3>
+
 <h3>Contrato do Token: <span id="tokenContractToken">Buscando informação...</span></h3>
 <br><br>
 <h3>Saldo em Tokens</h3>
@@ -25,9 +25,14 @@ const htmlCabecalho = `<h3>
       style="width: 500px"
     />
     <br /><br />
-    <label for="formAmount">Quantidade:</label>
+    <label for="formAmount">Quantidade de tokens:</label>
     <br /><br />
     <input type="number" disabled name="formAmount" id="formAmount" />
+    <br /><br />
+    <br /><br />
+    <label for="formAmountMix">Quantidade de tokens no Mix:</label>
+    <br /><br />
+    <input type="number" disabled name="formAmountMix" id="formAmountMix" />
     <br /><br />
     <input type="button" value="Consultar" onclick="tokenManager.consultar()" />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -63,13 +68,37 @@ const htmlMintar = `<h2>Novo Token</h2>
 
 const htmlMix = `<h2>Mixer de Token</h2>
 <div>
-  <form action="" name="formStake" id="formStake" method="get">
+    <label for="formTo">Endereço do sacador dos tokens:</label>
+    <br /><br />
+    <input
+      type="text"
+      placeholder="<0x...>"
+      required
+      name="formTo"
+      id="formTo"
+      size="100"
+      maxlength="45"
+      style="width: 500px"
+    />
     <br /><br />
     <label for="formAmount">Quantidade:</label>
     <br /><br />
     <input type="number" placeholder="10000" required name="formAmount" id="formAmount" />
     <br /><br />
     <input id="btnMix" type="button" value="Mix Token" onclick="tokenManager.mix()" />
+  </form>
+</div>`;
+
+
+const htmlUnMix = `<h2>UnMix Token</h2>
+<div>
+  <form action="" name="formUnMix" id="formUnMix" method="get">
+    <br /><br />
+    <label for="formAmount">Quantidade:</label>
+    <br /><br />
+    <input type="number" placeholder="10000" required name="formAmount" id="formAmount" />
+    <br /><br />
+    <input id="btnUnMix" type="button" value="UnMix Token" onclick="tokenManager.withdraw()" />
   </form>
 </div>`;
 
@@ -118,27 +147,5 @@ const htmlTransfer = `<h2>Transferir Token</h2>
     <input type="number" placeholder="10000" required name="formAmountTransfer" id="formAmountTransfer" />
     <br /><br />
     <input id="btnTransfer" type="button" value="Transferir Token" onclick="tokenManager.transfer()" />
-  </form>
-</div>`;
-
-const htmlRating = `<h2>Novo Rating</h2>
-<div>
-  <form action="" name="formRating" id="formRating" method="get">
-    <label>Rating:</label>
-    <br /><br />
-    <input type="text" placeholder="AAA" required name="formAmountRating" id="formAmountRating" />
-    <br /><br />
-    <input id="btnRating" type="button" value="Rating Token" onclick="tokenManager.mudarRating()" />
-  </form>
-</div>`;
-
-const htmlSelecionarContrato = `<h2>Escolha o Contrato pelo HASH</h2>
-<div>
-  <form action="" name="formContrato" id="formContrato" method="get">
-    <label>Contrato:</label>
-    <br /><br />
-    <input type="text" placeholder="0x2A846FC387e88F1fAC685AeFD70EeE26394C5611" required name="formHashContrato" id="formHashContrato" />
-    <br /><br />
-    <input id="btnContrato" type="button" value="Selecionar Contrato" onclick="tokenManager.mudarContrato()" />
   </form>
 </div>`;

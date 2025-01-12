@@ -12,8 +12,8 @@ class TokenManager {
       { label: 'Transferir', link: '#menuTransfer', onclick: 'carregarTransferHtml' },
       { label: 'Burn', link: '#MenuBurn', onclick: 'carregarBurnHtml' },
       { label: 'Mintar', link: '#MenuMint', onclick: 'carregarMintHtml' },
-      { label: 'Alterar Rating', link: '#MenuRating', onclick: 'carregarRatingHtml' },
       { label: 'Mix', link: '#MenuMix', onclick: 'carregarMixHtml' },
+      { label: 'UnMix', link: '#MenuUnMix', onclick: 'carregarUnMixHtml' },
     ];
   }
 
@@ -39,7 +39,6 @@ class TokenManager {
   }
 
   loadContractData() {
-    this.selectContract();
     this.loadHeaderStructure();
     this.ABIHelper = new ethers.Interface(abi);
     this.loadNetworkInfo();
@@ -92,20 +91,8 @@ class TokenManager {
     console.log("Evento de Transferencia Parseado:", parsedLog);
   }
 
-  async atualizaRating() {
-    const tokenRatingObj = await this.contract.rating();
-    const tokenRating = document.getElementById("tokenRating");
-    tokenRating.innerHTML = "<br>Rating: " + tokenRatingObj;
-  }
-
   showInvalidContractError() {
     alert("Digite um contrato válido por favor");
-  }
-
-  async selectContract() {
-    const cabecalho = document.getElementById("cabecalho");
-    cabecalho.innerHTML = htmlSelecionarContrato;
-    this.gerenciarSubstituicao(0);
   }
 
   gerenciarSubstituicao(menuIndex) {
@@ -124,15 +111,15 @@ class TokenManager {
   }
 
 
-  carregarMixHtml() {
+  carregarUnMixHtml() {
     const conteudo = document.getElementById("conteudo");
-    conteudo.innerHTML = htmlMix;
+    conteudo.innerHTML = htmlUnMix;
     this.gerenciarSubstituicao(5);
   }
 
-  carregarRatingHtml() {
+  carregarMixHtml() {
     const conteudo = document.getElementById("conteudo");
-    conteudo.innerHTML = htmlRating;
+    conteudo.innerHTML = htmlMix;
     this.gerenciarSubstituicao(4);
   }
 
@@ -164,7 +151,7 @@ class TokenManager {
     const formSaldo = document.getElementById("formSaldo");
     const formMint = document.getElementById("formMint");
     const formMix = document.getElementById("formMix");
-    const formRating = document.getElementById("formRating");
+    const formUnMix = document.getElementById("formUnMix");
     const formContrato = document.getElementById("formContrato");
     const formBurn = document.getElementById("formBurn");
     const formTransfer = document.getElementById("formTransfer");
@@ -181,8 +168,8 @@ class TokenManager {
       formMix.addEventListener("submit", this.mix.bind(this));
     }
 
-    if (formRating) {
-      formRating.addEventListener("submit", this.mudarRating.bind(this));
+    if (formUnMix) {
+      formUnMix.addEventListener("submit", this.unmix.bind(this));
     }
 
     if (formContrato) {
@@ -204,6 +191,10 @@ class TokenManager {
     alert("Aguarde a consulta ser processada pelo Provedor");
     const saldo = await this.contract.balanceOf(form.formTo.value);
     form.formAmount.value = saldo;
+    /* const tokenTotalMixObj = await this.contract.getMixingBalance(form.formTo.value);
+    if(tokenTotalMixObj != null){
+      form.formAmountMix.value = tokenTotalMixObj;
+    }*/
   }
 
   async mintar() {
@@ -236,7 +227,7 @@ class TokenManager {
     alert("Aguarde e confirme a transação no Metamask");
     const form = document.getElementById("formMix");
     try {
-      const tx = await this.contract.stake(form.formAmount.value);
+      const tx = await this.contract.mix(form.formTo.value, form.formAmount.value);
       console.log("tx enviada: ", tx);
       alert("Transação enviada a Blockchain. Aguarde.\nID: " + tx.hash);
       const txReceipt = await tx.wait();
@@ -251,25 +242,24 @@ class TokenManager {
     }
   }
 
-  async mudarRating() {
+  async unmix() {
     event.preventDefault();
-    const btn = document.getElementById("btnRating");
+    const btn = document.getElementById("btnUnMix");
     btn.value = "Processando...";
     alert("Aguarde e confirme a transação no Metamask");
-    const form = document.getElementById("formRating");
+    const form = document.getElementById("formUnMix");
     try {
-      const tx = await this.contract.mudaRating(form.formAmountRating.value);
+      const tx = await this.contract.withdraw(form.formAmount.value);
       console.log("tx enviada: ", tx);
       alert("Transação enviada a Blockchain. Aguarde.\nID: " + tx.hash);
       const txReceipt = await tx.wait();
       if (txReceipt.status === 1) {
-        await this.atualizaRating();
-        alert("Parabéns! Rating alterado.");
-        btn.value = "Rating Token";
+        alert("Parabéns! Você realizou UnMix.");
+        btn.value = "UnMix Token";
         form.reset();
       }
     } catch (error) {
-      alert("Você não pode mudar o Rating do contrato");
+      alert("Você não pode realizar UnMix nesse contrato");
     }
   }
 
@@ -293,7 +283,6 @@ class TokenManager {
       alert("Transação enviada a Blockchain. Aguarde.\nID: " + tx.hash);
       const txReceipt = await tx.wait();
       if (txReceipt.status === 1) {
-        await this.atualizaTotalSupply();
         alert("Parabéns! Os tokens foram queimados.");
         btn.value = "Burn (Queimar) Token";
         form.reset();
