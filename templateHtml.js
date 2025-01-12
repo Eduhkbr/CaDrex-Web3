@@ -61,7 +61,7 @@ const htmlMintar = `<h2>Novo Token</h2>
 </div>`;
 
 
-const htmlStaking = `<h2>Congelar Token</h2>
+const htmlMix = `<h2>Mixer de Token</h2>
 <div>
   <form action="" name="formStake" id="formStake" method="get">
     <br /><br />
@@ -69,7 +69,7 @@ const htmlStaking = `<h2>Congelar Token</h2>
     <br /><br />
     <input type="number" placeholder="10000" required name="formAmount" id="formAmount" />
     <br /><br />
-    <input id="btnStaking" type="button" value="Staking Token" onclick="tokenManager.staking()" />
+    <input id="btnMix" type="button" value="Mix Token" onclick="tokenManager.mix()" />
   </form>
 </div>`;
 

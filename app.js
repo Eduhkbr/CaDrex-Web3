@@ -13,7 +13,7 @@ class TokenManager {
       { label: 'Burn', link: '#MenuBurn', onclick: 'carregarBurnHtml' },
       { label: 'Mintar', link: '#MenuMint', onclick: 'carregarMintHtml' },
       { label: 'Alterar Rating', link: '#MenuRating', onclick: 'carregarRatingHtml' },
-      { label: 'Staking', link: '#MenuStake', onclick: 'carregarStakeHtml' },
+      { label: 'Mix', link: '#MenuMix', onclick: 'carregarMixHtml' },
     ];
   }
 
@@ -124,9 +124,9 @@ class TokenManager {
   }
 
 
-  carregarStakeHtml() {
+  carregarMixHtml() {
     const conteudo = document.getElementById("conteudo");
-    conteudo.innerHTML = htmlStaking;
+    conteudo.innerHTML = htmlMix;
     this.gerenciarSubstituicao(5);
   }
 
@@ -163,7 +163,7 @@ class TokenManager {
   registerEventListeners() {
     const formSaldo = document.getElementById("formSaldo");
     const formMint = document.getElementById("formMint");
-    const formStake = document.getElementById("formStake");
+    const formMix = document.getElementById("formMix");
     const formRating = document.getElementById("formRating");
     const formContrato = document.getElementById("formContrato");
     const formBurn = document.getElementById("formBurn");
@@ -177,8 +177,8 @@ class TokenManager {
       formMint.addEventListener("submit", this.mintar.bind(this));
     }
 
-    if (formStake) {
-      formStake.addEventListener("submit", this.staking.bind(this));
+    if (formMix) {
+      formMix.addEventListener("submit", this.mix.bind(this));
     }
 
     if (formRating) {
@@ -229,12 +229,12 @@ class TokenManager {
   }
 
   
-  async staking() {
+  async mix() {
     event.preventDefault();
-    const btn = document.getElementById("btnStaking");
+    const btn = document.getElementById("btnMix");
     btn.value = "Processando...";
     alert("Aguarde e confirme a transação no Metamask");
-    const form = document.getElementById("formStake");
+    const form = document.getElementById("formMix");
     try {
       const tx = await this.contract.stake(form.formAmount.value);
       console.log("tx enviada: ", tx);
@@ -242,12 +242,12 @@ class TokenManager {
       const txReceipt = await tx.wait();
       if (txReceipt.status === 1) {
         await this.atualizaTotalSupply();
-        alert("Parabéns! Você realizou staking.");
-        btn.value = "Staking Token";
+        alert("Parabéns! Você realizou Mix.");
+        btn.value = "Mix Token";
         form.reset();
       }
     } catch (error) {
-      alert("Você não pode realizar staking nesse contrato");
+      alert("Você não pode realizar Mix nesse contrato");
     }
   }
 
