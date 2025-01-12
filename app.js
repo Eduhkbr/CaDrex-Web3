@@ -13,6 +13,7 @@ class TokenManager {
       { label: 'Burn', link: '#MenuBurn', onclick: 'carregarBurnHtml' },
       { label: 'Mintar', link: '#MenuMint', onclick: 'carregarMintHtml' },
       { label: 'Alterar Rating', link: '#MenuRating', onclick: 'carregarRatingHtml' },
+      { label: 'Staking', link: '#MenuStake', onclick: 'carregarStakeHtml' },
     ];
   }
 
@@ -122,6 +123,13 @@ class TokenManager {
     `).join('');
   }
 
+
+  carregarStakeHtml() {
+    const conteudo = document.getElementById("conteudo");
+    conteudo.innerHTML = htmlStaking;
+    this.gerenciarSubstituicao(5);
+  }
+
   carregarRatingHtml() {
     const conteudo = document.getElementById("conteudo");
     conteudo.innerHTML = htmlRating;
@@ -155,6 +163,7 @@ class TokenManager {
   registerEventListeners() {
     const formSaldo = document.getElementById("formSaldo");
     const formMint = document.getElementById("formMint");
+    const formStake = document.getElementById("formStake");
     const formRating = document.getElementById("formRating");
     const formContrato = document.getElementById("formContrato");
     const formBurn = document.getElementById("formBurn");
@@ -166,6 +175,10 @@ class TokenManager {
 
     if (formMint) {
       formMint.addEventListener("submit", this.mintar.bind(this));
+    }
+
+    if (formStake) {
+      formStake.addEventListener("submit", this.staking.bind(this));
     }
 
     if (formRating) {
@@ -212,6 +225,29 @@ class TokenManager {
       }
     } catch (error) {
       alert("Você não pode Mintar nesse contrato");
+    }
+  }
+
+  
+  async staking() {
+    event.preventDefault();
+    const btn = document.getElementById("btnStaking");
+    btn.value = "Processando...";
+    alert("Aguarde e confirme a transação no Metamask");
+    const form = document.getElementById("formStake");
+    try {
+      const tx = await this.contract.stake(form.formAmount.value);
+      console.log("tx enviada: ", tx);
+      alert("Transação enviada a Blockchain. Aguarde.\nID: " + tx.hash);
+      const txReceipt = await tx.wait();
+      if (txReceipt.status === 1) {
+        await this.atualizaTotalSupply();
+        alert("Parabéns! Você realizou staking.");
+        btn.value = "Staking Token";
+        form.reset();
+      }
+    } catch (error) {
+      alert("Você não pode realizar staking nesse contrato");
     }
   }
 

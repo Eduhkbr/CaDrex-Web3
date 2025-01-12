@@ -60,6 +60,19 @@ const htmlMintar = `<h2>Novo Token</h2>
   </form>
 </div>`;
 
+
+const htmlStaking = `<h2>Congelar Token</h2>
+<div>
+  <form action="" name="formStake" id="formStake" method="get">
+    <br /><br />
+    <label for="formAmount">Quantidade:</label>
+    <br /><br />
+    <input type="number" placeholder="10000" required name="formAmount" id="formAmount" />
+    <br /><br />
+    <input id="btnStaking" type="button" value="Staking Token" onclick="tokenManager.staking()" />
+  </form>
+</div>`;
+
 const htmlBurn = `<h2>Burn Token</h2>
 <div>
   <form action="" name="formBurn" id="formBurn" method="get">
