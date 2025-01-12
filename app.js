@@ -39,11 +39,18 @@ class TokenManager {
   }
 
   loadContractData() {
+    this.selectContract();
     this.loadHeaderStructure();
     this.ABIHelper = new ethers.Interface(abi);
     this.loadNetworkInfo();
     this.loadTokenInfo();
     this.loadTransferEvents();
+  }
+
+  async selectContract() {
+    const cabecalho = document.getElementById("cabecalho");
+    cabecalho.innerHTML = htmlSelecionarContrato;
+    this.gerenciarSubstituicao(0);
   }
 
   async loadHeaderStructure() {
@@ -150,11 +157,11 @@ class TokenManager {
   registerEventListeners() {
     const formSaldo = document.getElementById("formSaldo");
     const formMint = document.getElementById("formMint");
-    const formMix = document.getElementById("formMix");
-    const formUnMix = document.getElementById("formUnMix");
     const formContrato = document.getElementById("formContrato");
     const formBurn = document.getElementById("formBurn");
     const formTransfer = document.getElementById("formTransfer");
+    const formMix = document.getElementById("formMix");
+    const formUnMix = document.getElementById("formUnMix");
 
     if (formSaldo) {
       formSaldo.addEventListener("submit", this.consultar.bind(this));
@@ -162,14 +169,6 @@ class TokenManager {
 
     if (formMint) {
       formMint.addEventListener("submit", this.mintar.bind(this));
-    }
-
-    if (formMix) {
-      formMix.addEventListener("submit", this.mix.bind(this));
-    }
-
-    if (formUnMix) {
-      formUnMix.addEventListener("submit", this.unmix.bind(this));
     }
 
     if (formContrato) {
@@ -182,6 +181,14 @@ class TokenManager {
 
     if (formTransfer) {
       formTransfer.addEventListener("submit", this.transfer.bind(this));
+    }
+    
+    if (formMix) {
+      formMix.addEventListener("submit", this.mix.bind(this));
+    }
+
+    if (formUnMix) {
+      formUnMix.addEventListener("submit", this.unmix.bind(this));
     }
   }
 
