@@ -39,18 +39,12 @@ class TokenManager {
   }
 
   loadContractData() {
-    this.selectContract();
+    this.carregarInicioHtml();
     this.loadHeaderStructure();
     this.ABIHelper = new ethers.Interface(abi);
     this.loadNetworkInfo();
     this.loadTokenInfo();
     this.loadTransferEvents();
-  }
-
-  async selectContract() {
-    const cabecalho = document.getElementById("cabecalho");
-    cabecalho.innerHTML = htmlSelecionarContrato;
-    this.gerenciarSubstituicao(0);
   }
 
   async loadHeaderStructure() {

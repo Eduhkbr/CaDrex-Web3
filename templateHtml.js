@@ -149,14 +149,3 @@ const htmlTransfer = `<h2>Transferir Token</h2>
     <input id="btnTransfer" type="button" value="Transferir Token" onclick="tokenManager.transfer()" />
   </form>
 </div>`;
-
-const htmlSelecionarContrato = `<h2>Escolha o Contrato pelo HASH</h2>
-<div>
-  <form action="" name="formContrato" id="formContrato" method="get">
-    <label>Contrato:</label>
-    <br /><br />
-    <input type="text" placeholder="0x2A846FC387e88F1fAC685AeFD70EeE26394C5611" required name="formHashContrato" id="formHashContrato" />
-    <br /><br />
-    <input id="btnContrato" type="button" value="Selecionar Contrato" onclick="tokenManager.mudarContrato()" />
-  </form>
-</div>`;
