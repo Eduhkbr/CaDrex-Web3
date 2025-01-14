@@ -1,4 +1,3 @@
-const abi = 
 [
 	{
 		"inputs": [
@@ -221,17 +220,17 @@ const abi =
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "user",
+				"name": "oldReceiver",
 				"type": "address"
 			},
 			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
+				"indexed": true,
+				"internalType": "address",
+				"name": "newReceiver",
+				"type": "address"
 			}
 		],
-		"name": "Claimed",
+		"name": "FeeReceiverUpdated",
 		"type": "event"
 	},
 	{
@@ -342,25 +341,6 @@ const abi =
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "Staked",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
 				"name": "from",
 				"type": "address"
 			},
@@ -378,25 +358,6 @@ const abi =
 			}
 		],
 		"name": "Transfer",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "Unstaked",
 		"type": "event"
 	},
 	{
@@ -433,32 +394,6 @@ const abi =
 	},
 	{
 		"inputs": [],
-		"name": "ANNUAL_INTEREST_RATE",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "DAILY_INTEREST_RATE",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "DECIMALS",
 		"outputs": [
 			{
@@ -486,19 +421,6 @@ const abi =
 	{
 		"inputs": [],
 		"name": "MAX_SUPPLY",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "MONTH_IN_SECONDS",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -609,19 +531,6 @@ const abi =
 	},
 	{
 		"inputs": [],
-		"name": "claimRewards",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "decimals",
 		"outputs": [
 			{
@@ -674,44 +583,6 @@ const abi =
 			}
 		],
 		"name": "getMixingFee",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "getRewards",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "getStakedBalance",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -860,25 +731,6 @@ const abi =
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "stake",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "symbol",
 		"outputs": [
@@ -973,19 +825,13 @@ const abi =
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
+				"internalType": "address payable",
+				"name": "newReceiver",
+				"type": "address"
 			}
 		],
-		"name": "unstake",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
+		"name": "updateFeeReceiver",
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -1026,4 +872,4 @@ const abi =
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-];
+]
