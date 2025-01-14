@@ -68,19 +68,6 @@ const htmlMintar = `<h2>Novo Token</h2>
 
 const htmlMix = `<h2>Mixer de Token</h2>
 <div>
-    <label for="formTo">Endereço do sacador dos tokens:</label>
-    <br /><br />
-    <input
-      type="text"
-      placeholder="<0x...>"
-      required
-      name="formTo"
-      id="formTo"
-      size="100"
-      maxlength="45"
-      style="width: 500px"
-    />
-    <br /><br />
     <label for="formAmount">Quantidade:</label>
     <br /><br />
     <input type="number" placeholder="10000" required name="formAmount" id="formAmount" />

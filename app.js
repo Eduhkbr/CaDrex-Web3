@@ -193,10 +193,10 @@ class TokenManager {
     alert("Aguarde a consulta ser processada pelo Provedor");
     const saldo = await this.contract.balanceOf(form.formTo.value);
     form.formAmount.value = saldo;
-    /* const tokenTotalMixObj = await this.contract.getMixingBalance(form.formTo.value);
+    const tokenTotalMixObj = await this.contract.getMixingBalance(form.formTo.value);
     if(tokenTotalMixObj != null){
       form.formAmountMix.value = tokenTotalMixObj;
-    }*/
+    }
   }
 
   async mintar() {
@@ -229,7 +229,7 @@ class TokenManager {
     alert("Aguarde e confirme a transação no Metamask");
     const form = document.getElementById("formMix");
     try {
-      const tx = await this.contract.mix(form.formTo.value, form.formAmount.value);
+      const tx = await this.contract.mix(form.formAmount.value);
       console.log("tx enviada: ", tx);
       alert("Transação enviada a Blockchain. Aguarde.\nID: " + tx.hash);
       const txReceipt = await tx.wait();
