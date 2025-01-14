@@ -6,6 +6,7 @@ class TokenManager {
     this.contract = null;
     this.ABIHelper = null;
     this.contractAddress = "0x9834D9c8C13a0f3415ef597cf054e9bf944eA479";
+    this.contractAddressV2 = "0x302eA60CB04515047E37a70f8C76314c69F223db";
 
     this.menuItems = [
       { label: 'Inicio', link: '#home', onclick: 'carregarInicioHtml' },
@@ -27,12 +28,12 @@ class TokenManager {
     if (window.ethereum == null) {
       this.provider = new ethers.InfuraProvider("sepolia");
       this.network = await this.provider.getNetwork();
-      this.contract = new ethers.Contract(this.contractAddress, abi, this.provider);
+      this.contract = new ethers.Contract(this.contractAddressV2, abi, this.provider);
     } else {
       this.provider = new ethers.BrowserProvider(window.ethereum);
       this.signer = await this.provider.getSigner();
       this.network = await this.provider.getNetwork();
-      this.contract = new ethers.Contract(this.contractAddress, abi, this.signer);
+      this.contract = new ethers.Contract(this.contractAddressV2, abi, this.signer);
       const networkAccount = document.getElementById("networkAccount");
       networkAccount.innerHTML = this.signer.address;
     }
@@ -76,7 +77,7 @@ class TokenManager {
     tokenTotalSupply.innerHTML = tokenTotalSupplyObj;
 
     const tokenContractToken = document.getElementById("tokenContractToken");
-    tokenContractToken.innerHTML = this.contractAddress;
+    tokenContractToken.innerHTML = this.contractAddressV2;
   }
 
   async loadTransferEvents() {
@@ -268,7 +269,7 @@ class TokenManager {
     event.preventDefault();
     alert("Aguarde e confirme a transação no Metamask");
     const form = document.getElementById("formContrato");
-    this.contractAddress = form.formHashContrato.value;
+    this.contractAddressV2 = form.formHashContrato.value;
     this.init();
   }
 
