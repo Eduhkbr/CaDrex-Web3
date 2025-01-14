@@ -1,3 +1,4 @@
+const abi = 
 [
 	{
 		"inputs": [
@@ -872,4 +873,4 @@
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]
+];
